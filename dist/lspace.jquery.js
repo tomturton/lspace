@@ -63,16 +63,31 @@
                         if (contents.length) {
                             htmlArr[htmlArr.length] = openTag + divide(contents, isMultiline) + closeTag;
                         } else {
-                            htmlArr[htmlArr.length] = openTag;
+                            htmlArr[htmlArr.length] = '<span class="lspace-letter">' + openTag + '</span>';
                         }
                         break;
 
 
                     case 3: // text
-                        var chars    = $node.text(),
-                            numChars = chars.length;
+                        var chars = $node.text();
 
-                        // Each letter
+                        // Trim string
+                        if (i === 0) {
+                            // First node, so left trim
+                            chars = chars.replace(/^\s+/, '');
+                        }
+                        if (i === numNodes - 1) {
+                            // Last node, so right trim
+                            chars = chars.replace(/\s+$/, '');
+                        }
+
+                        // All remaining whitespace must be reduced to one space
+                        chars = chars.replace(/\s+/g, ' ');
+                        
+
+                        var numChars = chars.length;
+
+                        // Wrap each letter in a span we can style
                         for (var c = 0; c < numChars; c+=1) {
                             var character = chars[c];
 
