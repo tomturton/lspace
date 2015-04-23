@@ -1,0 +1,14 @@
+.lspace-container {
+    font-size: 0.1px;
+    text-align: justify;
+}
+
+.lspace-container:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+}
+
+.lspace-letter {
+    display: inline-block;
+}
